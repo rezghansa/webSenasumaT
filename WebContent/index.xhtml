@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+										   xmlns:f="http://java.sun.com/jsf/core"
+										   xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+    <link href="css/custom.css" rel="stylesheet"/>
+   <title>Login</title>
+</head>
+
+<body>
+	<div class="navbar navbar-default navbar-fixed-top" id="header">
+	<h:form>
+			<h:outputLabel for="username" value="Username:" />
+			<h:inputText id="username" value="#{login.user}"/>
+			<h:outputLabel for="Password" value="Password:" />
+			<h:inputSecret id="password" value="#{login.pwd}" />
+			<h:commandButton action="#{login.validateUsernamePassword}" value="Login" />
+			<h:outputLabel for="msg" value="#{login.msg}" />
+	</h:form>
+	</div>
+	<div class="main-login main-center">
+	<h:form>
+       		<h:outputLabel for="Gender" value="Gender:" />
+			<h:selectOneRadio value="#{userDetails.gender}">
+			 	<f:selectItem itemValue="Male" itemLabel="Male" />
+			   	<f:selectItem itemValue="Female" itemLabel="Female" />
+			</h:selectOneRadio>
+			<h:outputLabel for="FirstName" value="First Name:" />
+			<h:inputText name="name" value="#{userDetails.userFirst}" id="Firstname" />
+			<h:outputLabel for="LastName" value="Last Name:" />
+			<h:inputText name="name" value="#{userDetails.userSurname}" id="Lastname" />
+			<h:outputLabel for="EmailAddress" value="Email Address:" />
+			<h:inputText  name="email" value="#{userDetails.email}" id="email"/>
+			<h:outputLabel for="userId" value="User Name:" />
+		    <h:inputText name="username" value="#{userDetails.userName}" id="username"/>
+		    <h:outputLabel for="passwrd" value="Password:" />
+		    <h:inputSecret name="password" value="#{userDetails.userPassowrd}" id="password"/>
+		      <h:outputLabel for="confirm" value="Confirm Password:" />
+	        <h:inputSecret name="confirm" id="confirm" value="#{userDetails.confirmPassword}"/>
+	        <h:commandButton action="#{userDetails.signUpUser}" value="Sign Up" />
+	</h:form>
+	</div>
+</body>
+
+</html>
