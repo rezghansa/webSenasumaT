@@ -107,4 +107,26 @@ public class DbConnector {
 		return 0;
 	}
 
+	
+	public static int getPrimaryKeyLastValue(String tableName,String primaryColomn){
+		Statement stmt = null;
+		ResultSet rs = null;
+		// Create and execute an SQL statement that returns some data.
+		String SQL = "select max("+primaryColomn+") as "+primaryColomn+" from "+tableName;
+		if(con!= null){
+			try {
+				stmt = con.createStatement();
+				rs = stmt.executeQuery(SQL);
+				if (rs.next()) {
+					int value = rs.getInt(1);			
+					return value;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return 0;
+			}
+		}
+		return 0;
+	}
 }
