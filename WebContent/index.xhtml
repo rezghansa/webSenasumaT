@@ -1,46 +1,124 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
-										   xmlns:f="http://java.sun.com/jsf/core"
-										   xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-    <link href="css/custom.css" rel="stylesheet"/>
-   <title>Login</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+<link href="css/Custom.css" rel="stylesheet" />
+<title>Login</title>
 </head>
 
 <body>
-	<div class="navbar navbar-default navbar-fixed-top" id="header">
-	<h:form>
-			<h:outputLabel for="username" value="Username:" />
-			<h:inputText id="username" value="#{login.user}"/>
-			<h:outputLabel for="Password" value="Password:" />
-			<h:inputSecret id="password" value="#{login.pwd}" />
-			<h:commandButton action="#{login.validateUsernamePassword}" value="Login" />
-			<h:outputLabel for="msg" value="#{login.msg}" />
-	</h:form>
+
+	<div class="navbar navbar-default navbar-fixed-top " id="header">
+		<div class="container" data-spy="affix-top">
+			<div class="navbar-header">
+				<br />
+				<button class="navbar-toggle" type="button" data-toggle="collapse"
+					data-target="#navbar-main">
+					<span class="icon-bar"> </span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Senasuma</a>
+			</div>
+		</div>
 	</div>
-	<div class="main-login main-center">
-	<h:form>
-       		<h:outputLabel for="Gender" value="Gender:" />
-			<h:selectOneRadio value="#{userDetails.gender}">
-			 	<f:selectItem itemValue="Male" itemLabel="Male" />
-			   	<f:selectItem itemValue="Female" itemLabel="Female" />
-			</h:selectOneRadio>
-			<h:outputLabel for="FirstName" value="First Name:" />
-			<h:inputText name="name" value="#{userDetails.userFirst}" id="Firstname" />
-			<h:outputLabel for="LastName" value="Last Name:" />
-			<h:inputText name="name" value="#{userDetails.userSurname}" id="Lastname" />
-			<h:outputLabel for="EmailAddress" value="Email Address:" />
-			<h:inputText  name="email" value="#{userDetails.email}" id="email"/>
-			<h:outputLabel for="userId" value="User Name:" />
-		    <h:inputText name="username" value="#{userDetails.userName}" id="username"/>
-		    <h:outputLabel for="passwrd" value="Password:" />
-		    <h:inputSecret name="password" value="#{userDetails.userPassowrd}" id="password"/>
-		      <h:outputLabel for="confirm" value="Confirm Password:" />
-	        <h:inputSecret name="confirm" id="confirm" value="#{userDetails.confirmPassword}"/>
-	        <h:commandButton action="#{userDetails.signUpUser}" value="Sign Up" />
-	</h:form>
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-login">
+			<div class="panel-heading">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-6">
+							<a href="#" class="active" id="login-form-link">Login</a>
+						</div>
+						<div class="col-xs-6">
+							<a href="#" id="register-form-link">Register</a>
+						</div>
+					</div>
+					<hr></hr>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<h:form id="login-form" style="display: block;">
+								<div class="form-group">
+									<h:outputLabel for="username" value="Username:" />
+									<h:inputText id="username" value="#{login.user}" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="Password" value="Password:" />
+									<h:inputSecret id="password" value="#{login.pwd}" />
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-sm-6 col-sm-offset-3">
+											<h:commandButton action="#{login.validateUsernamePassword}"
+												value="Login" class="form-control btn btn-login"/>
+											<h:outputLabel for="msg" value="#{login.msg}" />
+										</div>
+									</div>
+								</div>
+							</h:form>
+							<h:form style="display: none;" id="register-form">
+								<div class="form-group">
+									<h:outputLabel for="Gender" value="Gender:" />
+									<h:selectOneRadio value="#{userDetails.gender}">
+										<f:selectItem itemValue="Male" itemLabel="Male" />
+										<f:selectItem itemValue="Female" itemLabel="Female" />
+									</h:selectOneRadio>
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="FirstName" value="First Name:" />
+									<h:inputText name="name" value="#{userDetails.userFirst}"
+										id="Firstname" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="LastName" value="Last Name:" />
+									<h:inputText name="name" value="#{userDetails.userSurname}"
+										id="Lastname" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="EmailAddress" value="Email Address:" />
+									<h:inputText name="email" value="#{userDetails.email}"
+										id="email" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="userId" value="User Name:" />
+									<h:inputText name="username" value="#{userDetails.userName}"
+										id="username" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="passwrd" value="Password:" />
+									<h:inputSecret name="password"
+										value="#{userDetails.userPassowrd}" id="password" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="confirm" value="Confirm Password:" />
+									<h:inputSecret name="confirm" id="confirm"
+										value="#{userDetails.confirmPassword}" />
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-sm-6 col-sm-offset-3">
+											<h:commandButton action="#{userDetails.signUpUser}"
+												value="Sign Up" class="form-control btn btn-register" />
+										</div>
+									</div>
+								</div>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
