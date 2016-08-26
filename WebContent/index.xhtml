@@ -5,9 +5,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
 
 <link href="css/Custom.css" rel="stylesheet" />
 <title>Login</title>
@@ -47,18 +47,22 @@
 						<div class="col-lg-12">
 							<h:form id="login-form" style="display: block;">
 								<div class="form-group">
-									<h:outputLabel for="username" value="Username:" />
-									<h:inputText id="username" value="#{login.user}" />
+									<h:outputLabel for="username" value="Username:"
+										class="form-controlTextField" />
+									<h:inputText id="username" value="#{login.user}"
+										class="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="Password" value="Password:" />
-									<h:inputSecret id="password" value="#{login.pwd}" />
+									<h:outputLabel for="Password" value="Password:"
+										class="form-controlTextField" />
+									<h:inputSecret id="password" value="#{login.pwd}"
+										class="form-control" />
 								</div>
 								<div class="form-group">
 									<div class="row">
 										<div class="col-sm-6 col-sm-offset-3">
 											<h:commandButton action="#{login.validateUsernamePassword}"
-												value="Login" class="form-control btn btn-login"/>
+												value="Login" class="form-control btn btn-login" />
 											<h:outputLabel for="msg" value="#{login.msg}" />
 										</div>
 									</div>
@@ -66,39 +70,47 @@
 							</h:form>
 							<h:form style="display: none;" id="register-form">
 								<div class="form-group">
-									<h:outputLabel for="Gender" value="Gender:" />
+									<h:outputLabel for="Gender" value="Gender:"
+										class="form-controlTextField" />
 									<h:selectOneRadio value="#{userDetails.gender}">
-										<f:selectItem itemValue="Male" itemLabel="Male" />
-										<f:selectItem itemValue="Female" itemLabel="Female" />
+										<f:selectItem itemValue="Male" itemLabel="Male" styleClass="controlRadioButton"/>
+										<f:selectItem itemValue="Female" itemLabel="Female" styleClass="controlRadioButton"/>
 									</h:selectOneRadio>
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="FirstName" value="First Name:" />
+									<h:outputLabel for="FirstName" value="First Name:"
+										class="form-controlTextField" />
 									<h:inputText name="name" value="#{userDetails.userFirst}"
-										id="Firstname" />
+										id="Firstname" class="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="LastName" value="Last Name:" />
+									<h:outputLabel for="LastName" value="Last Name:"
+										class="form-controlTextField" />
 									<h:inputText name="name" value="#{userDetails.userSurname}"
-										id="Lastname" />
+										id="Lastname" class="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="EmailAddress" value="Email Address:" />
+									<h:outputLabel for="EmailAddress" value="Email Address:"
+										class="form-controlTextField" />
 									<h:inputText name="email" value="#{userDetails.email}"
-										id="email" />
+										id="email" class="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="userId" value="User Name:" />
+									<h:outputLabel for="userId" value="User Name:"
+										class="form-controlTextField" />
 									<h:inputText name="username" value="#{userDetails.userName}"
-										id="username" />
+										id="username" class="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="passwrd" value="Password:" />
+									<h:outputLabel for="passwrd" value="Password:"
+										class="form-controlTextField" />
 									<h:inputSecret name="password"
-										value="#{userDetails.userPassowrd}" id="password" />
+										value="#{userDetails.userPassowrd}" id="password"
+										class="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="confirm" value="Confirm Password:" />
+									<h:outputLabel for="confirm" value="Confirm Password:"
+										class="form-controlTextField" />
 									<h:inputSecret name="confirm" id="confirm"
 										value="#{userDetails.confirmPassword}" />
 								</div>
@@ -117,8 +129,9 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

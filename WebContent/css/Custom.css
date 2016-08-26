@@ -127,3 +127,12 @@ height: 100px;
  	background-color: #1CA347;
  	border-color: #1CA347;
  }
+.form-controlTextField {
+  font-size: 12px;
+  background-color: #fff;
+  background-image: none;
+}
+.controlRadioButton {
+  font-size: 8px;
+  background-color: #fff;
+}
