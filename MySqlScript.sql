@@ -1,3 +1,5 @@
+//Sql File
+
 create database sanasuma;
 
 use sanasuma;
