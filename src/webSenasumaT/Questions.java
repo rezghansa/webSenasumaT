@@ -1,9 +1,12 @@
 package webSenasumaT;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean(name = "questions", eager = true)
 @SessionScoped
@@ -17,11 +20,33 @@ public class Questions implements Serializable{
 	private int autoID;
 	private String question;
 	private int correctAnswer;
+	private int answerTypeId = 0;
+	private HashMap<Integer, String> answeTypesMap;
+	
+	
+	public void init(ComponentSystemEvent event) {
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+	    if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
+	    	AnswerTypes ansTypes = new AnswerTypes();
+			setAnsweTypesMap(ansTypes.loadAnswerTypes());
+	    }
+	}
 	
 	public Questions(){
 		System.out.println("called consructor");
 	}
 	
+	
+	public int getAnswerTypeId() {
+		return answerTypeId;
+	}
+
+
+	public void setAnswerTypeId(int answerTypeId) {
+		this.answerTypeId = answerTypeId;
+	}
+
+
 	public int getQuestionId() {
 		return questionId;
 	}
@@ -46,12 +71,19 @@ public class Questions implements Serializable{
 	public void setCorrectAnswer(int correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
+	public HashMap<Integer, String> getAnsweTypesMap() {
+		return answeTypesMap;
+	}
+
+	public void setAnsweTypesMap(HashMap<Integer, String> answeTypesMap) {
+		this.answeTypesMap = answeTypesMap;
+	}
 		
 	public void saveQuestion(){
 		DbConnector.connectToDatabase();
 		int autoTempId = DbConnector.getPrimaryKeyLastValue("questions", "questionId");
 		questionId = autoTempId+1;
-		String insertQuery = "insert into questions(questionId,question,autoId,correctAnsewer) values("+questionId+",'"+question+"',"+autoID+","+correctAnswer+")";
+		String insertQuery = "insert into questions(questionId,question,autoId,correctAnsewer,answerType) values("+questionId+",'"+question+"',"+autoID+","+correctAnswer+","+answerTypeId+")";
 		DbConnector.InsertionQuery(insertQuery);
 		DbConnector.ClearConnection();
 	}

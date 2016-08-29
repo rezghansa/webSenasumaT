@@ -69,9 +69,7 @@ create table answers(
 	answerId int,
 	ansewer varchar(5000),
 	incorrectAnswer varchar(5000),
-	answerType int,
-	PRIMARY KEY (answerId),	
-	FOREIGN KEY (answerType) REFERENCES answerType(questionAnswerType)
+	PRIMARY KEY (answerId)	
 )DEFAULT CHARACTER SET=utf8;
 
 create table questions(
@@ -79,9 +77,11 @@ create table questions(
 	autoId int,
 	question varchar(5000),
 	correctAnsewer int,
+	answerType int,
 	PRIMARY KEY (questionId),
 	FOREIGN KEY (autoId) REFERENCES exam(autoId),
-	FOREIGN KEY (correctAnsewer) REFERENCES answers(answerId)
+	FOREIGN KEY (correctAnsewer) REFERENCES answers(answerId),
+	FOREIGN KEY (answerType) REFERENCES answerType(questionAnswerType)
 )DEFAULT CHARACTER SET=utf8;
 
 

@@ -1,12 +1,9 @@
 package webSenasumaT;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean(name = "answers", eager = true)
 @ApplicationScoped
@@ -19,17 +16,7 @@ public class Answers implements Serializable{
 	private int answerId;
 	private String answer;
 	private String incorrctanswer;
-	private int answerTypeId = 0;
-	private HashMap<Integer, String> answeTypesMap;
-	
-	public void init(ComponentSystemEvent event) {
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
-	    	AnswerTypes ansTypes = new AnswerTypes();
-			setAnsweTypesMap(ansTypes.loadAnswerTypes());
-	    }
-	}
-	
+		
 	public String getIncorrctanswer() {
 		return incorrctanswer;
 	}
@@ -50,26 +37,12 @@ public class Answers implements Serializable{
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	public int getAnswerTypeId() {
-		return answerTypeId;
-	}
-	public void setAnswerTypeId(int answerTypeId) {
-		this.answerTypeId = answerTypeId;
-	}
-	
-	public HashMap<Integer, String> getAnsweTypesMap() {
-		return answeTypesMap;
-	}
-
-	public void setAnsweTypesMap(HashMap<Integer, String> answeTypesMap) {
-		this.answeTypesMap = answeTypesMap;
-	}
 	
 	public void saveAnswer(){
 		DbConnector.connectToDatabase();
 		int autoTempId = DbConnector.getPrimaryKeyLastValue("answers", "answerId");
 		answerId = autoTempId+1;
-		String insertQuery = "insert into answers(answerId,ansewer,answerType) values("+answerId+",'"+answer+"',"+answerTypeId+")";
+		String insertQuery = "insert into answers(answerId,ansewer,incorrectAnswer) values("+answerId+",'"+answer+"','"+incorrctanswer+"')";
 		DbConnector.InsertionQuery(insertQuery);
 		DbConnector.ClearConnection();
 		
