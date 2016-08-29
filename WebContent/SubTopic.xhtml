@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+										   xmlns:f="http://java.sun.com/jsf/core"
+										   xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<f:event listener="#{subtopics.init}" type="preRenderView" />
+    <link href="css/custom.css" rel="stylesheet"/>
+   <title>Sub Topic Insertion</title>
 </head>
 <body>
-
+		<div class="main-login main-center">
+			<h:form>
+				<h:outputLabel for="subtopics" value="Sub Topic :" />
+				<h:inputText name="subtopics" value="#{subtopics.subTopic}" id="subtopicsName" />
+				
+				<h:selectOneMenu for="subtopics" value="#{subtopics.topicId}">
+			        <f:selectItems value="#{subtopics.topicMap.entrySet()}" var="topicsMap" 
+			        itemValue="#{topicsMap.key}" itemLabel="#{topicsMap.value}" />
+			    </h:selectOneMenu>
+				
+				
+	        	<h:commandButton action="#{subtopics.setSubTopic}" value="Insert" />
+			</h:form>
+		</div>
 </body>
 </html>

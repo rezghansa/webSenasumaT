@@ -1,6 +1,7 @@
 package webSenasumaT;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
@@ -58,9 +59,27 @@ public class Topics implements Serializable{
 	public void init(ComponentSystemEvent event) {
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
 	    if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
-	    	TopicTypes ansTypes = new TopicTypes();
-	    	setTopicTypeMap(ansTypes.loadTopicTypes());
+	    	TopicTypes topicTypes = new TopicTypes();
+	    	setTopicTypeMap(topicTypes.loadTopicTypes());
 	    }
+	}
+	public HashMap<Integer, String> loadTopics() {
+		HashMap<Integer, String> topics = null;
+		DbConnector.connectToDatabase();
+		String sqlString = "select * from topics";
+		ResultSet rs= DbConnector.getResults(sqlString);
+		try{
+			topics = new HashMap<Integer,String>();
+			while (rs.next()) {
+				Integer key 	= rs.getInt("topicId");
+				String value 	= rs.getString("topicname");
+				topics.put(key, value);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		DbConnector.ClearConnection();
+		return topics;
 	}
 	
 }
