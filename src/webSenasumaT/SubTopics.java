@@ -1,6 +1,7 @@
 package webSenasumaT;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
@@ -60,6 +61,24 @@ public class SubTopics implements Serializable{
 		 String insertQuery = "insert into subtopic(subtopicId,subtopicname,topicId) values("+subTopicId+",'"+subTopic+"',"+topicId+")";
 		 DbConnector.InsertionQuery(insertQuery);
 		 DbConnector.ClearConnection();
+	}
+	public HashMap<Integer, String> loadSubTopicTypes() {
+		HashMap<Integer, String> subTopics = null;
+		DbConnector.connectToDatabase();
+		String sqlString = "select * from subtopic";
+		ResultSet rs= DbConnector.getResults(sqlString);
+		try{
+			subTopics = new HashMap<Integer,String>();
+			while (rs.next()) {
+				Integer key 	= rs.getInt("subtopicId");
+				String value 	= rs.getString("subtopicname");
+				subTopics.put(key, value);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		DbConnector.ClearConnection();
+		return subTopics;
 	}
 	
 }

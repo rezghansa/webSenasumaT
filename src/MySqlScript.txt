@@ -94,3 +94,12 @@ create table UserExams(
 	FOREIGN KEY (userId) REFERENCES userDetails(autoId),
 	FOREIGN KEY (examId) REFERENCES exam(autoId)
 )DEFAULT CHARACTER SET=utf8;
+
+create table examQuestions(
+	autoId int,
+	examId int,
+	questionId int,
+	PRIMARY KEY (autoId),
+	FOREIGN KEY (examId) REFERENCES exam(autoId),
+	FOREIGN KEY (questionId) REFERENCES questions(questionId)
+)DEFAULT CHARACTER SET=utf8;

@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+										   xmlns:f="http://java.sun.com/jsf/core"
+										   xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+    <link href="css/custom.css" rel="stylesheet"/>
+   <title>Exam Paper Setup</title>
+</head>
+<body>
+		<div class="main-login main-center">
+			<h:form>
+				<h:outputLabel for="examTypes" value="Exam Type:" />
+				<h:inputText name="examTypes" value="#{examTypes.examTypeName}" id="examTypesName" />
+	        	<h:commandButton action="#{examTypes.setExamType}" value="Insert" />
+			</h:form>
+		</div>
+</body>
+</html>

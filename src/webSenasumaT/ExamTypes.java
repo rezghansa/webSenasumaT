@@ -1,6 +1,8 @@
 package webSenasumaT;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -35,6 +37,24 @@ public class ExamTypes implements Serializable{
 		 String insertQuery = "insert into examTypes(examTypeId,examType) values("+examTypeId+",'"+examTypeName+"')";
 		 DbConnector.InsertionQuery(insertQuery);
 		 DbConnector.ClearConnection();
+	}
+	public HashMap<Integer, String> loadExamTypes() {
+		HashMap<Integer, String> examTypes = null;
+		DbConnector.connectToDatabase();
+		String sqlString = "select * from examTypes";
+		ResultSet rs= DbConnector.getResults(sqlString);
+		try{
+			examTypes = new HashMap<Integer,String>();
+			while (rs.next()) {
+				Integer key 	= rs.getInt("examTypeId");
+				String value 	= rs.getString("examType");
+				examTypes.put(key, value);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		DbConnector.ClearConnection();
+		return examTypes;
 	}
 	
 

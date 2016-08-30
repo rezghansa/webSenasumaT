@@ -1,65 +1,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+										   xmlns:f="http://java.sun.com/jsf/core"
+										   xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-	<title>Exam </title>
-	<style>
-		#div1 {width:200px;height:50px;padding:10px;border:1px solid #aaaaaa;}
-		#div2 {width:200px;height:50px;padding:10px;border:1px solid #aaaaaa;}
-	</style>
-	<script>
-		function allowDrop(ev) {
-		    ev.preventDefault();
-		}
-		
-		function drag(ev) {
-		    ev.dataTransfer.setData("text", ev.target.id);
-		}
-		
-		function drop(ev) {
-		    ev.preventDefault();
-		    var data = ev.dataTransfer.getData("text");
-		    ev.target.appendChild(document.getElementById(data));
-		}
-	</script>
-	
+	<f:event listener="#{exam.init}" type="preRenderView" />
+    <link href="css/custom.css" rel="stylesheet"/>
+   <title>Exam Setup</title>
 </head>
 <body>
-	<h:form>
-
-		<p>(1)How to go to moon ?</p>
-		<p>Drag and Drop correct Answer:</p>
-		
-
-		<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-		<br/>
-		
-		<p draggable="true" id="drag1" ondragstart="drag(event)" width="200" height="10">Drive Rocket</p>
-		<p draggable="true" id="drag2" ondragstart="drag(event)" width="200" height="10">Take Fuel </p>
-		
-		
-		<p>(2)How to go to moon ?</p>
-		<p>Check for correct Answer(s):</p>
-		
-		  <input type="checkbox" name="vehicle" value="Bike"> I have a bike</input><br/>
-		  <input type="checkbox" name="vehicle" value="Car"> I have a car</input><br/>
-		
-		
-		<p>(3)How to go to moon ?</p>
-		<p>Select correct Answer:</p>
-		
-		  <input type="radio" name="vehicle" value="Bike"> I have a bike</input><br/>
-		  <input type="radio" name="vehicle" value="Car"> I have a car</input><br/>  
-		 
-		<p>(3)How to go to moon ?</p>
-		<p>State correct Answer:</p>
-		
-		  <input type="text" name="vehicle"/><br/>
-	
-	<h:commandButton action="#{exam.completeExam}"
-			value="Complete"></h:commandButton>
-	</h:form>
-
+		<div class="main-login main-center">
+			<h:form>
+				<h:outputLabel for="exam" value="Exam Name:" />
+				<h:inputText name="exam" value="#{exam.examName}" id="examName" />
+				
+				<h:selectOneMenu for="exam" value="#{exam.examTypeId}">
+			        <f:selectItems value="#{exam.examTypeMap.entrySet()}" var="examTypeMap" 
+			        itemValue="#{examTypeMap.key}" itemLabel="#{examTypeMap.value}" />
+			    </h:selectOneMenu>
+			    
+			    <h:selectOneMenu for="exam" value="#{exam.subTopicId}">
+			        <f:selectItems value="#{exam.subTopicTypeMap.entrySet()}" var="subtopicsMap" 
+			        itemValue="#{subtopicsMap.key}" itemLabel="#{subtopicsMap.value}" />
+			    </h:selectOneMenu>
+				
+	        	<h:commandButton action="#{exam.setExam}" value="Insert" />
+			</h:form>
+		</div>
 </body>
 </html>
