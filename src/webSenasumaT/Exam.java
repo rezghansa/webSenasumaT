@@ -1,6 +1,7 @@
 package webSenasumaT;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
@@ -118,5 +119,26 @@ public class Exam implements Serializable {
 		public String completeExam() {
 			
 			return "menu";
+		}
+
+
+
+		public HashMap<Integer, String> loadExam() {
+			HashMap<Integer, String> exames = null;
+			DbConnector.connectToDatabase();
+			String sqlString = "select * from exam";
+			ResultSet rs= DbConnector.getResults(sqlString);
+			try{
+				exames = new HashMap<Integer,String>();
+				while (rs.next()) {
+					Integer key 	= rs.getInt("autoId");
+					String value 	= rs.getString("examName");
+					exames.put(key, value);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			DbConnector.ClearConnection();
+			return exames;
 		}
 }
