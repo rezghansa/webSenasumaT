@@ -2,6 +2,7 @@ package webSenasumaT;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -27,11 +28,17 @@ public class ExamSetupView implements Serializable {
     private List<Questions> droppedQuestions;
      
     private Questions selectedQuestion;
+    
+	private HashMap<Integer,String> examMap;
+	private int examId =0;
+    
      
     @PostConstruct
     public void init() {
         questions = service.loadListQuestions();
         droppedQuestions = new ArrayList<Questions>();
+        Exam examMap = new Exam();
+    	setExamMap(examMap.loadExam());
     }
      
     public void onQuestionDrop(DragDropEvent ddEvent) {
@@ -71,6 +78,35 @@ public class ExamSetupView implements Serializable {
 
 	public void setSelectedQuestion(Questions selectedQuestion) {
 		this.selectedQuestion = selectedQuestion;
+	}
+	
+	public HashMap<Integer, String> getExamMap() {
+		return examMap;
+	}
+
+	public void setExamMap(HashMap<Integer, String> examMap) {
+		this.examMap = examMap;
+	}
+
+	
+	public int getExamId() {
+		return examId;
+	}
+
+	public void setExamId(int examId) {
+		this.examId = examId;
+	}
+
+	public void setExamPaper(){
+		
+		for(int i = 0; i<droppedQuestions.size();i++){
+			Questions questionTemp = droppedQuestions.get(i);
+			ExamSetup examsetup = new ExamSetup();
+			examsetup.setQuestionId(questionTemp.getQuestionId());
+			examsetup.setExamId(this.examId);
+			examsetup.persistance();
+		}
+		
 	}
      
 }

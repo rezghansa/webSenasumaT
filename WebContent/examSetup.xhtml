@@ -18,6 +18,11 @@
 </h:head>
 <h:body>
 	<h:form>
+		
+		 <h:selectOneMenu for="examSetupView" value="#{examSetupView.examId}">
+		    <f:selectItems value="#{examSetupView.examMap.entrySet()}" var="ExamMap" 
+		       itemValue="#{ExamMap.key}" itemLabel="#{ExamMap.value}" />
+		</h:selectOneMenu>
 	
 		<p:fieldset id="availableCarsField" legend="Available Questions">
 			<p:dataGrid id="availableQuestions" var="question" value="#{examSetupView.questions}"
@@ -51,6 +56,9 @@
     <p:droppable for="selectedQuestions" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableQuestions" onDrop="handleDrop">
         <p:ajax listener="#{examSetupView.onQuestionDrop}" update="dropArea availableQuestions" />
     </p:droppable>
+ 	
+ 	
+ 	<h:commandButton action="#{examSetupView.setExamPaper}" value="Insert" />
  	
 	</h:form>
 
