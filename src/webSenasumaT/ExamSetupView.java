@@ -22,42 +22,55 @@ public class ExamSetupView implements Serializable {
 	@ManagedProperty("#{questions}")
     private Questions service;
  
-    private List<Questions> cars;
+    private List<Questions> questions;
      
-    private List<Questions> droppedCars;
+    private List<Questions> droppedQuestions;
      
-    private Questions selectedCar;
+    private Questions selectedQuestion;
      
     @PostConstruct
     public void init() {
-        cars = service.loadListQuestions();
-        droppedCars = new ArrayList<Questions>();
+        questions = service.loadListQuestions();
+        droppedQuestions = new ArrayList<Questions>();
     }
      
-    public void onCarDrop(DragDropEvent ddEvent) {
-    	Questions car = ((Questions) ddEvent.getData());
+    public void onQuestionDrop(DragDropEvent ddEvent) {
+    	Questions question = ((Questions) ddEvent.getData());
   
-        droppedCars.add(car);
-        cars.remove(car);
+        droppedQuestions.add(question);
+        questions.remove(question);
     }
+
+	public Questions getService() {
+		return service;
+	}
+
+	public void setService(Questions service) {
+		this.service = service;
+	}
+
+	public List<Questions> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Questions> questions) {
+		this.questions = questions;
+	}
+
+	public List<Questions> getDroppedQuestions() {
+		return droppedQuestions;
+	}
+
+	public void setDroppedQuestions(List<Questions> droppedQuestions) {
+		this.droppedQuestions = droppedQuestions;
+	}
+
+	public Questions getSelectedQuestion() {
+		return selectedQuestion;
+	}
+
+	public void setSelectedQuestion(Questions selectedQuestion) {
+		this.selectedQuestion = selectedQuestion;
+	}
      
-    public void setService(Questions service) {
-        this.service = service;
-    }
- 
-    public List<Questions> getCars() {
-        return cars;
-    }
- 
-    public List<Questions> getDroppedCars() {
-        return droppedCars;
-    }    
- 
-    public Questions getSelectedCar() {
-        return selectedCar;
-    }
- 
-    public void setSelectedCar(Questions selectedCar) {
-        this.selectedCar = selectedCar;
-    }
 }

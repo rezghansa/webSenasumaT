@@ -20,9 +20,9 @@
 	<h:form>
 	
 		<p:fieldset id="availableCarsField" legend="Available Questions">
-			<p:dataGrid id="availableCars" var="car" value="#{examSetupView.cars}"
+			<p:dataGrid id="availableQuestions" var="question" value="#{examSetupView.questions}"
 				columns="3">
-				<p:panel id="pnl" header="#{car.questionId}" style="text-align:center">
+				<p:panel id="pnl" header="#{question.question}" style="text-align:center">
 					<h:panelGrid columns="1" style="width:100%"></h:panelGrid>
 				</p:panel>
 
@@ -32,43 +32,26 @@
 		</p:fieldset>
 		
 		
-		<p:fieldset id="selectedCars" legend="Selected Questions" style="margin-top:20px">
+		<p:fieldset id="selectedQuestions" legend="Selected Questions" style="margin-top:20px">
         <p:outputPanel id="dropArea">
-            <h:outputText value="!!!Drop here!!!" rendered="#{empty examSetupView.droppedCars}" style="font-size:24px;" />
-            <p:dataTable id="selectedCarsTable" var="car" value="#{examSetupView.droppedCars}" rendered="#{not empty examSetupView.droppedCars}">
+            <h:outputText value="!!!Drop here!!!" rendered="#{empty examSetupView.droppedQuestions}" style="font-size:24px;" />
+            <p:dataTable id="selectedCarsTable" var="question" value="#{examSetupView.droppedQuestions}" rendered="#{not empty examSetupView.droppedQuestions}">
                 <p:column headerText="Id">
-                    <h:outputText value="#{car.questionId}" />
+                    <h:outputText value="#{question.questionId}" />
                 </p:column>
  
                 <p:column headerText="Question">
-                    <h:outputText value="#{car.question}" />
+                    <h:outputText value="#{question.question}" />
                 </p:column>
  
             </p:dataTable>
         </p:outputPanel>
     </p:fieldset>
  
-    <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCars" onDrop="handleDrop">
-        <p:ajax listener="#{examSetupView.onCarDrop}" update="dropArea availableCars" />
+    <p:droppable for="selectedQuestions" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableQuestions" onDrop="handleDrop">
+        <p:ajax listener="#{examSetupView.onQuestionDrop}" update="dropArea availableQuestions" />
     </p:droppable>
- 
-    <p:dialog header="Question Detail" widgetVar="carDialog" resizable="false" draggable="false"
-              showEffect="fade" hideEffect="fade" modal="true">
- 
-        <p:outputPanel id="display">
-            <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty examSetupView.selectedCar}">
- 
-                <h:outputText value="Id" />
-                <h:outputText value="#{examSetupView.selectedCar.questionId}" style="font-weight:bold"/>
- 
-                <h:outputText value="Question:" />
-                <h:outputText value="#{examSetupView.selectedCar.question}" style="font-weight:bold"/>
- 
-            </h:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
-		
-		
+ 	
 	</h:form>
 
 </h:body>
