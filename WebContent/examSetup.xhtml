@@ -1,19 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
-										   xmlns:f="http://java.sun.com/jsf/core"
-										   xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-    <link href="css/custom.css" rel="stylesheet"/>
-   <title>Exam Paper Setup</title>
-</head>
-<body>
-		<div class="main-login main-center">
-			<h:form>
-				
-	        	
-				
-			</h:form>
-		</div>
-</body>
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
+ 
+        droppedCar.fadeOut('fast');
+    }
+</script>
+</h:head>
+<h:body>
+	<h:form>
+		<p:fieldset id="availableCarsField" legend="Available Questions">
+			<p:dataGrid id="availableCars" var="car" value="#{dndCarsView.cars}"
+				columns="3">
+				<p:panel id="pnl" header="#{car.questionId}" style="text-align:center">
+					<h:panelGrid columns="1" style="width:100%">
+					</h:panelGrid>
+				</p:panel>
+
+				<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
+					stack=".ui-panel" />
+			</p:dataGrid>
+		</p:fieldset>
+		
+		
+		<p:fieldset id="selectedCars" legend="Selected Questions" style="margin-top:20px">
+        <p:outputPanel id="dropArea">
+            <h:outputText value="!!!Drop here!!!" rendered="#{empty dndCarsView.droppedCars}" style="font-size:24px;" />
+            <p:dataTable id="selectedCarsTable" var="car" value="#{dndCarsView.droppedCars}" rendered="#{not empty dndCarsView.droppedCars}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.questionId}" />
+                </p:column>
+ 
+                <p:column headerText="Question">
+                    <h:outputText value="#{car.question}" />
+                </p:column>
+ 
+            </p:dataTable>
+        </p:outputPanel>
+    </p:fieldset>
+ 
+    <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCars" onDrop="handleDrop">
+        <p:ajax listener="#{dndCarsView.onCarDrop}" update="dropArea availableCars" />
+    </p:droppable>
+ 
+    <p:dialog header="Question Detail" widgetVar="carDialog" resizable="false" draggable="false"
+              showEffect="fade" hideEffect="fade" modal="true">
+ 
+        <p:outputPanel id="display">
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty dndCarsView.selectedCar}">
+ 
+                <h:outputText value="Id" />
+                <h:outputText value="#{dndCarsView.selectedCar.questionId}" style="font-weight:bold"/>
+ 
+                <h:outputText value="Question:" />
+                <h:outputText value="#{dndCarsView.selectedCar.question}" style="font-weight:bold"/>
+ 
+            </h:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+		
+		
+	</h:form>
+
+</h:body>
 </html>
