@@ -18,7 +18,18 @@ public class ExamPaperGenerator implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private ArrayList<ExamPapaerBean> listOfExamPaperBeans;
 	
+	
+	
+	public ArrayList<ExamPapaerBean> getListOfExamPaperBeans() {
+		return listOfExamPaperBeans;
+	}
+
+	public void setListOfExamPaperBeans(ArrayList<ExamPapaerBean> listOfExamPaperBeans) {
+		this.listOfExamPaperBeans = listOfExamPaperBeans;
+	}
+
 	public void init(ComponentSystemEvent event) {
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
 	    if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
@@ -27,20 +38,20 @@ public class ExamPaperGenerator implements Serializable {
 	}
 	
 	public void loadData(){
-		ArrayList<ExamPapaerBean> listOfExamPaperBeans = new ArrayList<ExamPapaerBean>();
+		listOfExamPaperBeans = new ArrayList<ExamPapaerBean>();
 		int examId = 2;
-		String queryFetch = "SELECT a.ansewer,a.incorrectAnswer,ast.questionAnswerTypeName,q.question FROM "+ 
+		String queryFetch = "SELECT a.ansewer as ansewer,a.incorrectAnswer as incorrectAnswer,ast.questionAnswerTypeName as questionAnswerTypeName,q.question as question FROM "+ 
 							"answers as a,answertype as ast,questions as q,examquestions as ex "+
 							"where ex.examId = "+examId+" group by q.questionId";
 		DbConnector.connectToDatabase();
 		ResultSet rs= DbConnector.getResults(queryFetch);
 		try {
-			if(!rs.wasNull()){
+			while(rs.next()){
 				ExamPapaerBean examPaperBean = new ExamPapaerBean();
 				examPaperBean.setAnsewer((String)rs.getString("ansewer"));
-				examPaperBean.setAnsewer((String)rs.getString("incorrectAnswer"));
-				examPaperBean.setAnsewer((String)rs.getString("questionAnswerTypeName"));
-				examPaperBean.setAnsewer((String)rs.getString("question"));
+				examPaperBean.setIncorrectAnswer((String)rs.getString("incorrectAnswer"));
+				examPaperBean.setQuestionAnswerTypeName((String)rs.getString("questionAnswerTypeName"));
+				examPaperBean.setQuestion((String)rs.getString("question"));
 				listOfExamPaperBeans.add(examPaperBean);
 			}
 			 

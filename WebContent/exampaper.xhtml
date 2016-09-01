@@ -13,7 +13,20 @@
 <h:body>
 	<h:form>
 		
-		
+		 <p:dataTable id="selectedCarsTable" var="examBean" value="#{ExamPaperGenerator.listOfExamPaperBeans}" >
+                <p:column headerText="Id">
+                    <h:outputText value="#{examBean.question}" />
+                </p:column>
+ 
+                <p:column headerText="Answer">
+                    <h:outputText value="#{examBean.incorrectAnswer}" />
+                </p:column>
+ 				
+ 				<p:column headerText="Answer">
+                    <h:outputText value="#{examBean.ansewer}" />
+                </p:column>
+ 				
+            </p:dataTable>
  	
 	</h:form>
 </h:body>
