@@ -12,16 +12,8 @@
 <h:body>
 	<h:form>
 		
-		 <h:selectOneMenu for="examSetupView" value="#{examSetupView.examId}">
-		    <f:selectItems value="#{examSetupView.examMap.entrySet()}" var="ExamMap" 
-		       itemValue="#{ExamMap.key}" itemLabel="#{ExamMap.value}" />
-		</h:selectOneMenu>
-	
 		
  	
- 	<h:commandButton action="#{examSetupView.setExamPaper}" value="Insert" />
- 	
 	</h:form>
-
 </h:body>
 </html>
