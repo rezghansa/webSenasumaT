@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 
 @ManagedBean(name = "ExamPaperGenerator", eager = true)
 @SessionScoped
@@ -17,6 +19,12 @@ public class ExamPaperGenerator implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public void init(ComponentSystemEvent event) {
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+	    if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
+	    	loadData();
+	    }
+	}
 	
 	public void loadData(){
 		ArrayList<ExamPapaerBean> listOfExamPaperBeans = new ArrayList<ExamPapaerBean>();
