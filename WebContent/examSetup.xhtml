@@ -18,12 +18,12 @@
 </h:head>
 <h:body>
 	<h:form>
+	
 		<p:fieldset id="availableCarsField" legend="Available Questions">
-			<p:dataGrid id="availableCars" var="car" value="#{dndCarsView.cars}"
+			<p:dataGrid id="availableCars" var="car" value="#{examSetupView.cars}"
 				columns="3">
 				<p:panel id="pnl" header="#{car.questionId}" style="text-align:center">
-					<h:panelGrid columns="1" style="width:100%">
-					</h:panelGrid>
+					<h:panelGrid columns="1" style="width:100%"></h:panelGrid>
 				</p:panel>
 
 				<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
@@ -34,8 +34,8 @@
 		
 		<p:fieldset id="selectedCars" legend="Selected Questions" style="margin-top:20px">
         <p:outputPanel id="dropArea">
-            <h:outputText value="!!!Drop here!!!" rendered="#{empty dndCarsView.droppedCars}" style="font-size:24px;" />
-            <p:dataTable id="selectedCarsTable" var="car" value="#{dndCarsView.droppedCars}" rendered="#{not empty dndCarsView.droppedCars}">
+            <h:outputText value="!!!Drop here!!!" rendered="#{empty examSetupView.droppedCars}" style="font-size:24px;" />
+            <p:dataTable id="selectedCarsTable" var="car" value="#{examSetupView.droppedCars}" rendered="#{not empty examSetupView.droppedCars}">
                 <p:column headerText="Id">
                     <h:outputText value="#{car.questionId}" />
                 </p:column>
@@ -49,20 +49,20 @@
     </p:fieldset>
  
     <p:droppable for="selectedCars" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableCars" onDrop="handleDrop">
-        <p:ajax listener="#{dndCarsView.onCarDrop}" update="dropArea availableCars" />
+        <p:ajax listener="#{examSetupView.onCarDrop}" update="dropArea availableCars" />
     </p:droppable>
  
     <p:dialog header="Question Detail" widgetVar="carDialog" resizable="false" draggable="false"
               showEffect="fade" hideEffect="fade" modal="true">
  
         <p:outputPanel id="display">
-            <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty dndCarsView.selectedCar}">
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty examSetupView.selectedCar}">
  
                 <h:outputText value="Id" />
-                <h:outputText value="#{dndCarsView.selectedCar.questionId}" style="font-weight:bold"/>
+                <h:outputText value="#{examSetupView.selectedCar.questionId}" style="font-weight:bold"/>
  
                 <h:outputText value="Question:" />
-                <h:outputText value="#{dndCarsView.selectedCar.question}" style="font-weight:bold"/>
+                <h:outputText value="#{examSetupView.selectedCar.question}" style="font-weight:bold"/>
  
             </h:panelGrid>
         </p:outputPanel>

@@ -10,9 +10,9 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.DragDropEvent;
 
  
-@ManagedBean(name = "dndCarsView")
+@ManagedBean(name = "examSetupView")
 @ViewScoped
-public class DNDCarsView implements Serializable {
+public class ExamSetupView implements Serializable {
   
     /**
 	 * 
