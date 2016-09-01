@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedBean;
@@ -117,9 +116,9 @@ public class Questions implements Serializable{
 		HashMap<Integer, String> mapQuestion = loadQuestion();
 		Iterator<Entry<Integer, String>> iterator = mapQuestion.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry pair = (Map.Entry)iterator.next();
+			Entry<Integer, String> pair = iterator.next();
 			Questions que = new Questions();
-			que.setQuestionId((int)pair.getKey());
+			que.setQuestionId((Integer)pair.getKey());
 			que.setQuestion((String)pair.getValue());
 	        iterator.remove();
 	        listoFQuestions.add(que);
