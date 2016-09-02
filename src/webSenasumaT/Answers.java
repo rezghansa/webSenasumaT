@@ -1,6 +1,8 @@
 package webSenasumaT;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.HashMap;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -49,7 +51,24 @@ public class Answers implements Serializable{
 	}
 
 
-	
+	public HashMap<Integer, String> loadAnswers() {
+		HashMap<Integer, String> answers = null;
+		DbConnector.connectToDatabase();
+		String sqlString = "select * from answers";
+		ResultSet rs= DbConnector.getResults(sqlString);
+		try{
+			answers = new HashMap<Integer,String>();
+			while (rs.next()) {
+				Integer key 	= rs.getInt("answerId");
+				String value 	= rs.getString("ansewer");
+				answers.put(key, value);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		DbConnector.ClearConnection();
+		return answers;
+	}
 	
 
 }

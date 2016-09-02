@@ -12,20 +12,45 @@
 </h:head>
 <h:body>
 	<h:form>
+		
 		<h:outputLabel for="topic" value="Set up Topic" />
 		
+		<h:outputLabel for="topic" value="Topic Type:" />
 		<p:autoComplete id="topicType" value="#{quickSetupGenerator.topicType}" 
 					    completeMethod="#{quickSetupGenerator.loadtopicType}" />
 		
-		
+		<h:outputLabel for="topic" value="Topi:" />
 		<p:autoComplete id="topic" value="#{quickSetupGenerator.topic}" 
 					    completeMethod="#{quickSetupGenerator.loadtopic}" />
+					    
+		<h:outputLabel for="topic" value="Sub Topic:" />					    
+		<p:autoComplete id="subtopic" value="#{quickSetupGenerator.subtopic}" 
+					    completeMethod="#{quickSetupGenerator.loadSubtopic}" />					    
 		
 		
 		
 		<h:outputLabel for="exam" value="Set up Exam" />
 		
+		<h:outputLabel for="exam" value="Exam Type:" />
+		<p:autoComplete id="examType" value="#{quickSetupGenerator.examType}" 
+					    completeMethod="#{quickSetupGenerator.loadExamType}" />	
+		
+		<h:outputLabel for="exam" value="Exam:" />			    
+	    <p:autoComplete id="exam" value="#{quickSetupGenerator.exam}" 
+	    					completeMethod="#{quickSetupGenerator.loadExam}" />	
+		
+		
+		
 		<h:outputLabel for="answer" value="Set up Answer" />
+		
+		<h:outputLabel for="answer" value="answer Type:" />
+		<p:autoComplete id="answerType" value="#{quickSetupGenerator.answerType}" 
+					    completeMethod="#{quickSetupGenerator.loadAnswerType}" />	
+		
+		<h:outputLabel for="answer" value="Answer:" />			    
+	    <p:autoComplete id="answer" value="#{quickSetupGenerator.answer}" 
+	    					completeMethod="#{quickSetupGenerator.loadAnswer}" />	
+		
 	
 		<h:outputLabel for="questions" value="Set up Question:" />
 		
