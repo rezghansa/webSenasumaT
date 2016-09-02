@@ -2,8 +2,10 @@ package webSenasumaT;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -17,6 +19,32 @@ public class TopicTypes implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int topicTypeId; 
 	private String topicType;
+	private ArrayList<TopicTypes> listOfTopicTypes;
+	
+	@PostConstruct
+    public void init() {
+		setListOfTopicTypes(new ArrayList<TopicTypes>(loadTopics()));
+    }
+	
+	private ArrayList<TopicTypes> loadTopics() {
+		ArrayList<TopicTypes> tempListOfTopicTypes = new ArrayList<TopicTypes>();
+		DbConnector.connectToDatabase();
+		String sqlString = "select * from topicType";
+		ResultSet rs= DbConnector.getResults(sqlString);
+		try{
+			while (rs.next()) {
+				TopicTypes e = new TopicTypes();
+				e.setTopicTypeId(rs.getInt("topicTypeId"));
+				e.setTopicType(rs.getString("topicType"));
+				tempListOfTopicTypes.add(e);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		DbConnector.ClearConnection();
+		return tempListOfTopicTypes;
+	}
+
 	public int getTopicTypeId() {
 		return topicTypeId;
 	}
@@ -55,6 +83,14 @@ public class TopicTypes implements Serializable{
 		}
 		DbConnector.ClearConnection();
 		return topicTypes;
+	}
+
+	public ArrayList<TopicTypes> getListOfTopicTypes() {
+		return listOfTopicTypes;
+	}
+
+	public void setListOfTopicTypes(ArrayList<TopicTypes> listOfTopicTypes) {
+		this.listOfTopicTypes = listOfTopicTypes;
 	}
 
 }
