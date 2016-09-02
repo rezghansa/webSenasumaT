@@ -25,6 +25,7 @@ public class QuickSetupGenerator implements Serializable{
 	private String exam;
 	private String answerType;
 	private String answer;
+	private String question;
 	private HashMap<Integer,String> listOfTopicTypes;
 	private HashMap<Integer,String> listOfTopics;
 	private HashMap<Integer,String> listOfSubTopics;
@@ -34,8 +35,14 @@ public class QuickSetupGenerator implements Serializable{
 	private HashMap<Integer,String> listOfanswer;
 	
 	
-	
-	
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
 	public String getAnswerType() {
 		return answerType;
 	}
@@ -217,5 +224,9 @@ public class QuickSetupGenerator implements Serializable{
         return results;
 	}
 	
+	public void quickSetup(){
+		
+		
+	}
 	
 }

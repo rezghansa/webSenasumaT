@@ -54,6 +54,10 @@
 	
 		<h:outputLabel for="questions" value="Set up Question:" />
 		
+		<h:outputLabel for="question" value="Question:" />
+		<h:inputText id="questions" value="#{quickSetupGenerator.question}"/>
+
+		<h:commandButton action="#{quickSetupGenerator.quickSetup}" value="Insert" />
 		
 	</h:form>
 </h:body>
