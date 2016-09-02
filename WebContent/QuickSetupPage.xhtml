@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:event listener="#{quickSetupGenerator.init}" type="preRenderView" />
+</h:head>
+<h:body>
+	<h:form>
+		<h:outputLabel for="topic" value="Set up Topic" />
+		
+		<p:autoComplete id="topicType" value="#{quickSetupGenerator.topicType}" 
+					    completeMethod="#{quickSetupGenerator.loadtopicType}" />
+		
+		
+		<p:autoComplete id="topic" value="#{quickSetupGenerator.topic}" 
+					    completeMethod="#{quickSetupGenerator.loadtopic}" />
+		
+		
+		
+		<h:outputLabel for="exam" value="Set up Exam" />
+		
+		<h:outputLabel for="answer" value="Set up Answer" />
+	
+		<h:outputLabel for="questions" value="Set up Question:" />
+		
+		
+	</h:form>
+</h:body>
+</html>
