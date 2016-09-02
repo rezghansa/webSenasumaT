@@ -106,7 +106,7 @@ public class Exam implements Serializable {
 	    }
 	}
 
-	public void setTopic(){
+	public void setExam(){
 		 DbConnector.connectToDatabase();
 		 int autoTempId = DbConnector.getPrimaryKeyLastValue("exam", "autoId");
 		 autoId = autoTempId+1;
@@ -115,12 +115,7 @@ public class Exam implements Serializable {
 		 DbConnector.ClearConnection();
 	}
 
-		//validate login
-		public String completeExam() {
-			
-			return "menu";
-		}
-
+		
 
 
 		public HashMap<Integer, String> loadExam() {
